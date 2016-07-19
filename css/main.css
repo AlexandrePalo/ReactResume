@@ -1,0 +1,76 @@
+.text-center {
+    text-align: center;
+}
+
+.text-vertical {
+    -webkit-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+    text-align: right;
+
+}
+
+.month {
+    padding: 0;
+    font-size: small;
+    border-left: 1px solid;
+    border-right: 1px solid;
+    border-collapse: collapse;
+    height: 50px;
+}
+
+.m-t-20 {
+    margin-top: 20px;
+}
+.m-t-25 {
+    margin-top: 25px;
+}
+.m-t-5 {
+    margin-top: 5px;
+}
+
+.profile-img {
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
+}
+
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
+
+
+/* Timeline */
+
+.years {
+    z-index: 1;
+    padding:0;
+    margin:0;
+    list-style-type:none;
+}
+.years li {
+    margin-left:12.5%;
+    float:left; /*pour IE*/
+}
+
+.circle {
+    position: relative;
+    top: 10px;
+    left: 25%;
+
+    height: 15px;
+    width: 15px;
+    border: 2px solid;
+    border-radius: 50%;
+    background-color: white;
+}
+
+.filling-line {
+    position: relative;
+    top: 40px;
+    width: 100%;
+    background-color: black;
+    height: 2px;
+    z-index: -1;
+}
