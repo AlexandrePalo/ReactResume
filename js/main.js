@@ -346,55 +346,24 @@ var Timeline = React.createClass({
             );
         });
 
-        if (this.state.clicked == false) {
-            return (
-                <div className="row m-t-20">
-                    <div className="row">
-                        <span>clicked : false</span>
-                        <span> selected : {this.state.selected}</span>
-                    </div>
-                    <div className="row">
-                        {proExperiencesTop}
-                    </div>
-
-                    <div className="row m-t-20">
-                        <ul className="years">
-                            {years}
-                        </ul>
-                        <div className="filling-line"></div>
-                    </div>
-
-                    <div className="row m-t-80 border-bottom">
-                        {proExperiencesBottom}
-                    </div>
+        return (
+            <div className="row m-t-20">
+                <div className="row">
+                    {proExperiencesTop}
                 </div>
-            );
-        }
-        else {
-            return (
+
                 <div className="row m-t-20">
-                    <div className="row">
-                        <span>clicked : true</span>
-                        <span> selected : {this.state.selected}</span>
-                    </div>
-                    <div className="row">
-                        {proExperiencesTop}
-                    </div>
-
-                    <div className="row m-t-20">
-                        <ul className="years">
-                            {years}
-                        </ul>
-                        <div className="filling-line"></div>
-                    </div>
-
-                    <div className="row m-t-80 border-bottom">
-                        {proExperiencesBottom}
-                    </div>
+                    <ul className="years">
+                        {years}
+                    </ul>
+                    <div className="filling-line"></div>
                 </div>
-            );
-        }
 
+                <div className="row m-t-80 border-bottom">
+                    {proExperiencesBottom}
+                </div>
+            </div>
+        );
 
     }
 });
