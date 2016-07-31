@@ -54,7 +54,7 @@ var Information = React.createClass({
         if (this.props.href != undefined) {
             return (
                 <div className={rowClassName}>
-                    <a className="col-lg-12" href={this.props.href}>
+                    <a className="col-lg-12 borderLeftHover" href={this.props.href}>
                     <span className="fa-stack fa-lg">
                         <i className="fa fa-circle-thin fa-stack-2x" />
                         <i className={iconClassName} />
@@ -67,7 +67,7 @@ var Information = React.createClass({
         else {
             return (
                 <div className="row">
-                    <div className="col-lg-12">
+                    <div className="col-lg-12 borderLeftHover">
                     <span className="fa-stack fa-lg">
                         <i className="fa fa-circle-thin fa-stack-2x" />
                         <i className={iconClassName} />
@@ -365,15 +365,6 @@ var Timeline = React.createClass({
             </div>
         );
 
-    }
-});
-
-var Title = React.createClass({
-
-    render : function () {
-        return (
-            <div></div>
-        );
     }
 });
 

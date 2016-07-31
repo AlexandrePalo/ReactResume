@@ -22,6 +22,7 @@ body, html {
     border-collapse: collapse;
     height: 50px;
 }
+
 .m-t-80 {
     margin-top: 80px;
 }
@@ -62,6 +63,7 @@ body, html {
     margin:0;
     list-style-type:none;
 }
+
 .years li {
     margin-left:12.5%;
     float:left; /*pour IE*/
@@ -78,6 +80,7 @@ body, html {
     border-radius: 50%;
     background-color: white;
 }
+
 .circle:hover, .circle.selected {
     background-color: #025aa5;
     border-color: #01549b;
@@ -103,6 +106,8 @@ body, html {
     padding-bottom: 10px;
 }
 
+/* Titres */
+
 h1 {
     color: black;
 }
@@ -118,6 +123,8 @@ h3 {
 /* 3d315b 444b6e 708b75 9ab87a f8f991
    bleu                        jaune  */
 
+/*Pro Experiences */
+
 .proExp.unselected {
     transition-duration: 0.5s;
     color: transparent;
@@ -132,3 +139,14 @@ h3 {
 .proExp {
     transition-duration: 0.5s;
 }
+
+/* Others */
+
+.borderLeftHover, .proExp {
+    border-left : 2px solid transparent;
+}
+.borderLeftHover:hover, .proExp:hover, .proExp.selected {
+    border-left : 2px solid #01549b;
+    transition-duration: 0.5s;
+}
+
