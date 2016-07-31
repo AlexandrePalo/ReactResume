@@ -78,13 +78,23 @@ body, html {
     border-radius: 50%;
     background-color: white;
 }
+.circle:hover, .circle.selected {
+    background-color: #025aa5;
+    border-color: #01549b;
+    transition-duration: 0.5s;
+}
+
+.yearTimeline {
+    font-size: 20px;
+    font-weight: bold;
+}
 
 .filling-line {
     position: relative;
-    top: 40px;
+    top: 45px;
     width: 100%;
     background-color: #f2bb05;
-    height: 2px;
+    height: 5px;
     z-index: -1;
 }
 
@@ -107,3 +117,18 @@ h3 {
 
 /* 3d315b 444b6e 708b75 9ab87a f8f991
    bleu                        jaune  */
+
+.proExp.unselected {
+    transition-duration: 0.5s;
+    color: transparent;
+    text-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+
+.proExp.selected {
+    transition-duration: 0.5s;
+    color: #025aa5;
+}
+
+.proExp {
+    transition-duration: 0.5s;
+}

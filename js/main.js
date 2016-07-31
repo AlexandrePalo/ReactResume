@@ -143,76 +143,259 @@ var Header = React.createClass({
 var ProExperience = React.createClass({
 
     render : function () {
-        return (
-            <div className={this.props.colClassName}>
-                <div className="row">
-                    <div className="col-lg-12">
-                        <h4>{this.props.title}</h4>
+
+        if (this.props.selected == undefined) {
+            var className = this.props.colClassName + ' proExp';
+            return (
+                <div className={className}>
+                    <div className="row">
+                        <div className="col-lg-12">
+                            <h4>{this.props.title}</h4>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-lg-12 text-justify">
+                            {this.props.corpus}
+                        </div>
                     </div>
                 </div>
-                <div className="row">
-                    <div className="col-lg-12 text-justify">
-                        {this.props.corpus}
+            );
+        }
+        else if (this.props.selected == this.props.index) {
+            var className = this.props.colClassName + ' proExp selected';
+            return (
+                <div className={className}>
+                    <div className="row">
+                        <div className="col-lg-12">
+                            <h4>{this.props.title}</h4>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-lg-12 text-justify">
+                            {this.props.corpus}
+                        </div>
                     </div>
                 </div>
-            </div>
-        );
+            );
+        }
+        else {
+            var className = this.props.colClassName + ' proExp unselected';
+            return (
+                <div className={className}>
+                    <div className="row">
+                        <div className="col-lg-12">
+                            <h4>{this.props.title}</h4>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-lg-12 text-justify">
+                            {this.props.corpus}
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+    }
+});
+
+var Circle = React.createClass({
+
+    getInitialState : function() {
+        return {
+            clicked: false
+        }
+    },
+
+    onMouseOver : function(e) {
+        if (!this.props.clicked) {
+            this.props.onChange(this.props.index, false)
+        }
+    },
+
+    onMouseOut : function(e) {
+        if (!this.props.clicked) {
+            this.props.onChange(undefined, false)
+        }
+    },
+
+    onClick : function(e) {
+        if ((this.props.index == this.props.selected) && !this.props.clicked) {
+            this.setState({clicked: true});
+            this.props.onChange(this.props.index, true);
+        }
+        else if ((this.props.index == this.props.selected) && this.props.clicked) {
+            this.setState({clicked: false});
+            this.props.onChange(undefined, false);
+        }
+        else {
+            this.setState({clicked: true});
+            this.props.onChange(this.props.index, true)
+        }
+    },
+
+    render : function() {
+        if (this.props.index == this.props.selected) {
+            return (
+                <li onClick={this.onClick} onMouseOver={this.onMouseOver} onMouseOut={this.onMouseOut}>
+                    <span className="yearTimeline">{this.props.year}</span><div className="circle selected"></div>
+                </li>
+            );
+        }
+        else {
+            return (
+                <li onClick={this.onClick} onMouseOver={this.onMouseOver} onMouseOut={this.onMouseOut}>
+                    <span className="yearTimeline">{this.props.year}</span><div className="circle"></div>
+                </li>
+            );
+        }
     }
 });
 
 var Timeline = React.createClass({
 
+    getInitialState : function () {
+        return {
+            clicked : false,
+            selected : undefined,
+            circles : [
+                {
+                    year : 2013
+                },
+                {
+                    year : 2014
+                },
+                {
+                    year : 2015
+                },
+                {
+                    year : 2016
+                },
+                {
+                    year : 2017
+                }
+            ],
+            proExperiencesTop : [
+                {
+                    colClassName : "col-lg-5",
+                    title : "Diplôme d'ingénieur Arts et Métiers",
+                    corpus : "Hacque adfabilitate confisus cum eadem postridie feceris, ut incognitus haerebis et repentinus, hortatore illo hesterno clientes numerando, qui sis vel unde venias diutius ambigente agnitus vero tandem et adscitus in amicitiam si te salutandi adsiduitati dederis triennio indiscretus et per tot dierum defueris tempus"
+                },
+                {
+                    colClassName : "col-lg-5 col-lg-offset-2",
+                    title : "Master Of Sciences Georgia Institute Of Technology",
+                    corpus : "Hacque adfabilitate confisus cum eadem postridie feceris, ut incognitus haerebis et repentinus, hortatore illo hesterno clientes numerando, qui sis vel unde venias diutius ambigente agnitus vero tandem et adscitus in amicitiam si te salutandi adsiduitati dederis triennio indiscretus et per tot dierum defueris tempus"
+                }
+            ],
+            proExperiencesBottom : [
+                {
+                    colClassName:"col-lg-4",
+                    title:"DALKIA groupe EDF",
+                    corpus:"Hacque adfabilitate confisus cum eadem postridie feceris, ut incognitus haerebis et repentinus, hortatore illo hesterno clientes numerando, qui sis vel unde venias diutius ambigente agnitus vero tandem et adscitus in amicitiam si te salutandi adsiduitati dederis triennio indiscretus et per tot dierum defueris tempus"
+                },
+                {     colClassName:"col-lg-4",
+                    title:"Atelier d'usinage PRECILOR",
+                    corpus:"Hacque adfabilitate confisus cum eadem postridie feceris, ut incognitus haerebis et repentinus, hortatore illo hesterno clientes numerando, qui sis vel unde venias diutius ambigente agnitus vero tandem et adscitus in amicitiam si te salutandi adsiduitati dederis triennio indiscretus et per tot dierum defueris tempus"
+                },
+                {      colClassName:"col-lg-4",
+                    title:"Usine d'électricité de METZ - UEM",
+                    corpus:"Hacque adfabilitate confisus cum eadem postridie feceris, ut incognitus haerebis et repentinus, hortatore illo hesterno clientes numerando, qui sis vel unde venias diutius ambigente agnitus vero tandem et adscitus in amicitiam si te salutandi adsiduitati dederis triennio indiscretus et per tot dierum defueris tempus"
+                }
+            ]
+        }
+    },
+
+    changeSelection : function (index, clicked) {
+        this.setState({selected : index, clicked: clicked});
+    },
+
     render : function () {
-        return (
-            <div className="row m-t-20">
-                <div className="row">
-                    <ProExperience
-                        colClassName="col-lg-5"
-                        title="Diplôme d'ingénieur Arts et Métiers"
-                        corpus="Hacque adfabilitate confisus cum eadem postridie feceris, ut incognitus haerebis et repentinus, hortatore illo hesterno clientes numerando, qui sis vel unde venias diutius ambigente agnitus vero tandem et adscitus in amicitiam si te salutandi adsiduitati dederis triennio indiscretus et per tot dierum defueris tempus"
-                    />
-                    <ProExperience
-                        colClassName="col-lg-5 col-lg-offset-2"
-                        title="Master Of Sciences Georgia Institute Of Technology"
-                        corpus="Hacque adfabilitate confisus cum eadem postridie feceris, ut incognitus haerebis et repentinus, hortatore illo hesterno clientes numerando, qui sis vel unde venias diutius ambigente agnitus vero tandem et adscitus in amicitiam si te salutandi adsiduitati dederis triennio indiscretus et per tot dierum defueris tempus"
-                    />
-                </div>
+        var that = this;
+        var proExperiencesTop = this.state.proExperiencesTop.map(function(elem, i){
+            return (
+                <ProExperience
+                    colClassName={elem.colClassName}
+                    title={elem.title}
+                    corpus={elem.corpus}
+                    index={i}
+                    selected={that.state.selected}
+                />
+            );
+        });
+        var proExperiencesBottom = this.state.proExperiencesBottom.map(function(elem, i){
+            var j = i + that.state.proExperiencesTop.length;
+            return (
+                <ProExperience
+                    colClassName={elem.colClassName}
+                    title={elem.title}
+                    corpus={elem.corpus}
+                    index={j}
+                    selected={that.state.selected}
+                />
+            );
+        });
+        var years = this.state.circles.map(function(elem, i){
+            return (
+                <Circle
+                    year={elem.year}
+                    index={i}
+                    onChange={that.changeSelection}
+                    selected={that.state.selected}
+                    clicked={that.state.clicked}
+                />
+            );
+        });
 
+        if (this.state.clicked == false) {
+            return (
                 <div className="row m-t-20">
-                    <ul className="years">
-                        <li>
-                            <a href="#">
-                                2014
-                                <div className="circle"></div>
-                            </a>
-                        </li>
-                        <li><a href="#">2014<div className="circle"></div></a></li>
-                        <li><a href="#">2015<div className="circle"></div></a></li>
-                        <li><a href="#">2016<div className="circle"></div></a></li>
-                        <li><a href="#">2017<div className="circle"></div></a></li>
-                    </ul>
-                    <div className="filling-line"></div>
-                </div>
+                    <div className="row">
+                        <span>clicked : false</span>
+                        <span> selected : {this.state.selected}</span>
+                    </div>
+                    <div className="row">
+                        {proExperiencesTop}
+                    </div>
 
-                <div className="row m-t-80 border-bottom">
-                    <ProExperience
-                        colClassName="col-lg-4"
-                        title="Usine d'électricité de METZ - UEM"
-                        corpus="Hacque adfabilitate confisus cum eadem postridie feceris, ut incognitus haerebis et repentinus, hortatore illo hesterno clientes numerando, qui sis vel unde venias diutius ambigente agnitus vero tandem et adscitus in amicitiam si te salutandi adsiduitati dederis triennio indiscretus et per tot dierum defueris tempus"
-                    />
-                    <ProExperience
-                        colClassName="col-lg-4"
-                        title="Atelier d'usinage PRECILOR"
-                        corpus="Hacque adfabilitate confisus cum eadem postridie feceris, ut incognitus haerebis et repentinus, hortatore illo hesterno clientes numerando, qui sis vel unde venias diutius ambigente agnitus vero tandem et adscitus in amicitiam si te salutandi adsiduitati dederis triennio indiscretus et per tot dierum defueris tempus"
-                    />
-                    <ProExperience
-                        colClassName="col-lg-4"
-                        title="DALKIA groupe EDF"
-                        corpus="Hacque adfabilitate confisus cum eadem postridie feceris, ut incognitus haerebis et repentinus, hortatore illo hesterno clientes numerando, qui sis vel unde venias diutius ambigente agnitus vero tandem et adscitus in amicitiam si te salutandi adsiduitati dederis triennio indiscretus et per tot dierum defueris tempus"
-                    />
+                    <div className="row m-t-20">
+                        <ul className="years">
+                            {years}
+                        </ul>
+                        <div className="filling-line"></div>
+                    </div>
+
+                    <div className="row m-t-80 border-bottom">
+                        {proExperiencesBottom}
+                    </div>
                 </div>
-            </div>
-        );
+            );
+        }
+        else {
+            return (
+                <div className="row m-t-20">
+                    <div className="row">
+                        <span>clicked : true</span>
+                        <span> selected : {this.state.selected}</span>
+                    </div>
+                    <div className="row">
+                        {proExperiencesTop}
+                    </div>
+
+                    <div className="row m-t-20">
+                        <ul className="years">
+                            {years}
+                        </ul>
+                        <div className="filling-line"></div>
+                    </div>
+
+                    <div className="row m-t-80 border-bottom">
+                        {proExperiencesBottom}
+                    </div>
+                </div>
+            );
+        }
+
+
     }
 });
 
