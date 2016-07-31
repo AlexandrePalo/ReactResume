@@ -2,6 +2,8 @@
  * Created by Alexandre on 18/07/2016.
  */
 
+// HEADER and PRESENTATION
+
 var SwitchButton = React.createClass({
 
     switchToFrench : function(){
@@ -139,6 +141,8 @@ var Header = React.createClass({
     }
 
 });
+
+// MAIN TIMELINE
 
 var ProExperience = React.createClass({
 
@@ -373,6 +377,8 @@ var Timeline = React.createClass({
     }
 });
 
+// SKILLS
+
 var Skills = React.createClass({
 
     render : function () {
@@ -432,6 +438,8 @@ var Skills = React.createClass({
         );
     }
 });
+
+// FINAL RENDER
 
 var Main = React.createClass({
 
