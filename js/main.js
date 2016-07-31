@@ -142,60 +142,64 @@ var Header = React.createClass({
 
 var ProExperience = React.createClass({
 
-    render : function () {
+    getInitialState : function() {
+        return {
+            clicked: false
+        }
+    },
 
+    onMouseOver : function(e) {
+        if (!this.props.clicked) {
+            this.props.onChange(this.props.index, false)
+        }
+    },
+
+    onMouseOut : function(e) {
+        if (!this.props.clicked) {
+            this.props.onChange(undefined, false)
+        }
+    },
+
+    onClick : function(e) {
+        if ((this.props.index == this.props.selected) && !this.props.clicked) {
+            this.setState({clicked: true});
+            this.props.onChange(this.props.index, true);
+        }
+        else if ((this.props.index == this.props.selected) && this.props.clicked) {
+            this.setState({clicked: false});
+            this.props.onChange(undefined, false);
+        }
+        else {
+            this.setState({clicked: true});
+            this.props.onChange(this.props.index, true)
+        }
+    },
+
+    render : function () {
         if (this.props.selected == undefined) {
             var className = this.props.colClassName + ' proExp';
-            return (
-                <div className={className}>
-                    <div className="row">
-                        <div className="col-lg-12">
-                            <h4>{this.props.title}</h4>
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-lg-12 text-justify">
-                            {this.props.corpus}
-                        </div>
-                    </div>
-                </div>
-            );
         }
         else if (this.props.selected == this.props.index) {
             var className = this.props.colClassName + ' proExp selected';
-            return (
-                <div className={className}>
-                    <div className="row">
-                        <div className="col-lg-12">
-                            <h4>{this.props.title}</h4>
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-lg-12 text-justify">
-                            {this.props.corpus}
-                        </div>
-                    </div>
-                </div>
-            );
         }
         else {
             var className = this.props.colClassName + ' proExp unselected';
-            return (
-                <div className={className}>
-                    <div className="row">
-                        <div className="col-lg-12">
-                            <h4>{this.props.title}</h4>
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-lg-12 text-justify">
-                            {this.props.corpus}
-                        </div>
-                    </div>
-                </div>
-            );
         }
 
+        return (
+            <div className={className} onClick={this.onClick} onMouseOver={this.onMouseOver} onMouseOut={this.onMouseOut}>
+                <div className="row">
+                    <div className="col-lg-12">
+                        <h4>{this.props.title}</h4>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-lg-12 text-justify">
+                        {this.props.corpus}
+                    </div>
+                </div>
+            </div>
+        );
     }
 });
 
@@ -236,19 +240,16 @@ var Circle = React.createClass({
 
     render : function() {
         if (this.props.index == this.props.selected) {
-            return (
-                <li onClick={this.onClick} onMouseOver={this.onMouseOver} onMouseOut={this.onMouseOut}>
-                    <span className="yearTimeline">{this.props.year}</span><div className="circle selected"></div>
-                </li>
-            );
+            var divClassName = 'circle selected';
         }
         else {
-            return (
+            var divClassName = 'circle';
+        }
+        return (
                 <li onClick={this.onClick} onMouseOver={this.onMouseOver} onMouseOut={this.onMouseOut}>
-                    <span className="yearTimeline">{this.props.year}</span><div className="circle"></div>
+                    <span className="yearTimeline">{this.props.year}</span><div className={divClassName}></div>
                 </li>
             );
-        }
     }
 });
 
@@ -318,7 +319,9 @@ var Timeline = React.createClass({
                     title={elem.title}
                     corpus={elem.corpus}
                     index={i}
+                    onChange={that.changeSelection}
                     selected={that.state.selected}
+                    clicked={that.state.clicked}
                 />
             );
         });
@@ -330,7 +333,9 @@ var Timeline = React.createClass({
                     title={elem.title}
                     corpus={elem.corpus}
                     index={j}
+                    onChange={that.changeSelection}
                     selected={that.state.selected}
+                    clicked={that.state.clicked}
                 />
             );
         });
