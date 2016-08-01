@@ -57,7 +57,7 @@ var Information = React.createClass({
             return (
                 <div className={rowClassName}>
                     <a className="col-lg-12 borderLeftHover" href={this.props.href}>
-                    <span className="fa-stack fa-lg">
+                    <span className="fa-stack fa-lg" style={{marginRight: 5+'px'}}>
                         <i className="fa fa-circle-thin fa-stack-2x" />
                         <i className={iconClassName} />
                     </span>
@@ -70,7 +70,7 @@ var Information = React.createClass({
             return (
                 <div className="row">
                     <div className="col-lg-12 borderLeftHover">
-                    <span className="fa-stack fa-lg">
+                    <span className="fa-stack fa-lg" style={{marginRight: 5+'px'}}>
                         <i className="fa fa-circle-thin fa-stack-2x" />
                         <i className={iconClassName} />
                     </span>
@@ -250,10 +250,10 @@ var Circle = React.createClass({
             var divClassName = 'circle';
         }
         return (
-                <li onClick={this.onClick} onMouseOver={this.onMouseOver} onMouseOut={this.onMouseOut}>
-                    <span className="yearTimeline">{this.props.year}</span><div className={divClassName}></div>
-                </li>
-            );
+            <li onClick={this.onClick} onMouseOver={this.onMouseOver} onMouseOut={this.onMouseOut}>
+                <span className="yearTimeline">{this.props.year}</span><div className={divClassName}></div>
+            </li>
+        );
     }
 });
 
@@ -393,10 +393,15 @@ var Skills = React.createClass({
                     <div className="row">
                         <div className="col-lg-12">
                             <ul>
-                                <li>Suite office</li>
-                                <li>Programmation</li>
-                                <li>Linux</li>
-                                <li>Git</li>
+                                <li>
+                                    <i className="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i> CAO : CatiaV5 et Abacus
+                                </li>
+                                <li>
+                                    <i className="fa fa-gears fa-lg" aria-hidden="true"></i> Systèmes : mécaniques, hydrauliques
+                                </li>
+                                <li>
+                                    <i className="fa fa-cube fa-lg" aria-hidden="true"></i> Compétences process : forge, usinage, fonderie et métrologie
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -439,6 +444,21 @@ var Skills = React.createClass({
     }
 });
 
+// FOOTER
+
+var Footer = React.createClass({
+
+    render : function () {
+        return (
+            <footer className="footer">
+                <div className="container">
+                    <p className="text-muted">@ Alexandre PALO 2016. <a href="https://github.com/AlexandrePalo/ReactResume">Sources.</a></p>
+                </div>
+            </footer>
+        );
+    }
+});
+
 // FINAL RENDER
 
 var Main = React.createClass({
@@ -456,9 +476,12 @@ var Main = React.createClass({
     render : function () {
         return (
             <div>
-                <Header switch={this.switchLang} lang={this.state.lang} />
-                <Timeline />
-                <Skills />
+                <div className="container">
+                    <Header switch={this.switchLang} lang={this.state.lang} />
+                    <Timeline />
+                    <Skills />
+                </div>
+                <Footer />
             </div>
         );
     }
